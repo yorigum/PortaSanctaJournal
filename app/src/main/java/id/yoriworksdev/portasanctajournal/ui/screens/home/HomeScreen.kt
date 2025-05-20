@@ -1,15 +1,22 @@
 package id.yoriworksdev.portasanctajournal.ui.screens.home
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -17,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -74,7 +82,25 @@ fun Preview(){
     val navController = rememberNavController()
     Scaffold(modifier = Modifier.padding(8.dp),
         bottomBar = {
-            BottomNavigationBar(navController)
+            Row(modifier = Modifier.background(color=Color.White,shape = RoundedCornerShape(100.dp)).shadow(2.dp, shape = RoundedCornerShape(100.dp)).padding(8.dp).fillMaxWidth(1f), horizontalArrangement = Arrangement.SpaceAround){
+                for(i in 0..2){
+                    IconButton(
+                        onClick = {
+                            when(i){
+                                0 -> navController.navigate(BottomNavItem.Home.route)
+                                1 -> navController.navigate(BottomNavItem.Map.route)
+                                2 -> navController.navigate(BottomNavItem.Paspor.route)
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = BottomNavItem.Home.icon,
+                            contentDescription = BottomNavItem.Home.label
+                        )
+                    }
+
+                }
+            }
         }) {pv->
         NavHost(navController, startDestination = "home", modifier = Modifier.padding(pv)){
             composable(BottomNavItem.Home.route){

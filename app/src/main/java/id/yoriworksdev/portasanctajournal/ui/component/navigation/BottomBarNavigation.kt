@@ -51,7 +51,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                 alwaysShowLabel = false,
                 selectedContentColor = Color.Blue,
                 unselectedContentColor = Color.Gray,
-                selected = currentDestination?.hierarchy?.any { it.label==topLevelRoute.label } == true,
+                selected = currentDestination?.label == topLevelRoute.label,
                 onClick = {
                     navController.navigate(topLevelRoute.route) {
                         // Pop up to the start destination of the graph to
