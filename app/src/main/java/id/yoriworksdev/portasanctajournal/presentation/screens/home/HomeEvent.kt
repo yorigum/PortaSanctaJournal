@@ -1,4 +1,4 @@
-package id.yoriworksdev.portasanctajournal.ui.screens.home
+package id.yoriworksdev.portasanctajournal.presentation.screens.home
 
 sealed class HomeEvent {
     object LoadData : HomeEvent()
