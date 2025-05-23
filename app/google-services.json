@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "594754376093",
+    "project_id": "porta-sancta-yori",
+    "storage_bucket": "porta-sancta-yori.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594754376093:android:dae13325326ce7e5611f74",
+        "android_client_info": {
+          "package_name": "id.yoriworksdev.portasanctajournal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594754376093-dat0ncrvb9tr8bkpe3qvuripq7c45vhn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5LiB0icMYCYhsh16W_3njG2plODYjXxE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594754376093-dat0ncrvb9tr8bkpe3qvuripq7c45vhn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

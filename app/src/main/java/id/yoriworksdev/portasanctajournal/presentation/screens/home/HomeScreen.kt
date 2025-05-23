@@ -32,8 +32,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -55,6 +57,7 @@ fun HomeScreen() {
         ),
         contentDescription = "background",
         contentScale = ContentScale.Crop,
+        colorFilter = ColorFilter.tint(color = Color.Cyan.copy(alpha = 0.8f), blendMode = BlendMode.Screen),
         modifier = Modifier.fillMaxSize()
     )
     Box(
@@ -115,6 +118,7 @@ fun HomeScreen() {
         Button(onClick = { /* Start Ziarah */ }, modifier = Modifier.fillMaxWidth()) {
             Text("Mulai Ziarah Hari Ini")
         }
+        Spacer(modifier = Modifier.fillMaxHeight(0.2f))
     }
 
 }

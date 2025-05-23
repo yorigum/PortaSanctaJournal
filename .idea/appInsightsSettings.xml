@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="id.yoriworksdev.portasanctajournal" />
+                  <option name="mobileSdkAppId" value="1:594754376093:android:dae13325326ce7e5611f74" />
+                  <option name="projectId" value="porta-sancta-yori" />
+                  <option name="projectNumber" value="594754376093" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
