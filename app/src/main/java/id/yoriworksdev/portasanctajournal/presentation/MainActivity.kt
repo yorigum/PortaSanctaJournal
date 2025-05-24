@@ -50,6 +50,7 @@ import id.yoriworksdev.portasanctajournal.presentation.screens.home.HomeScreen
 import id.yoriworksdev.portasanctajournal.presentation.screens.login.PortaLoginActivity
 import id.yoriworksdev.portasanctajournal.ui.component.navigation.BottomNavigationBar
 import id.yoriworksdev.portasanctajournal.ui.theme.PortaSanctaJournalTheme
+import id.yoriworksdev.portasanctajournal.utils.Auth
 
 class MainActivity : ComponentActivity() {
     val db = Firebase.firestore
@@ -112,6 +113,16 @@ class MainActivity : ComponentActivity() {
                                                 startActivity(intent)
                                             }) {
                                                 Text("Login")
+                                                analytics.logEvent("login_button_clicked", null)
+                                            }
+                                        }
+                                        item{
+                                            Button(onClick = {
+                                                val intent = Intent(this@MainActivity, PortaLoginActivity::class.java)
+                                                intent.putExtra(Auth.IS_SIGNUP, true)
+                                                startActivity(intent)
+                                            }) {
+                                                Text("Sign Up")
                                                 analytics.logEvent("login_button_clicked", null)
                                             }
                                         }

@@ -29,18 +29,28 @@ import id.yoriworksdev.portasanctajournal.presentation.screens.home.HomeScreen
 import id.yoriworksdev.portasanctajournal.ui.component.navigation.BottomNavItem
 import id.yoriworksdev.portasanctajournal.ui.component.navigation.BottomNavigationBar
 import id.yoriworksdev.portasanctajournal.ui.theme.PortaSanctaJournalTheme
+import id.yoriworksdev.portasanctajournal.utils.Auth
 
-class PortaLoginActivity:ComponentActivity() {
+class PortaLoginActivity : ComponentActivity() {
+    private var isSignedUp: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        isSignedUp = intent.getBooleanExtra(Auth.IS_SIGNUP, false)
         enableEdgeToEdge()
-        setContent{
+        setContent {
             PortaSanctaJournalTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.White
+                    modifier = Modifier.fillMaxSize(), color = Color.White
                 ) {
-
+                    when (isSignedUp) {
+                        true -> {
+                           SignUpScreen()
+                        }
+                        else -> {
+                            LoginScreen()
+                        }
+                    }
+                    
                 }
             }
         }
