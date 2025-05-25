@@ -1,4 +1,6 @@
-package id.yoriworksdev.portasanctajournal.presentation.screens.home
+package id.yoriworksdev.portasanctajournal.presentation.screens.login
+
+
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.yoriworksdev.portasanctajournal.MainViewModel
@@ -10,34 +12,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : MainViewModel() {
     private val _shouldRestartApp = MutableStateFlow(false)
     val shouldRestartApp: StateFlow<Boolean>
         get() = _shouldRestartApp.asStateFlow()
 
-    private val _isAnonymous = MutableStateFlow(true)
-    val isAnonymous: StateFlow<Boolean>
-        get() = _isAnonymous.asStateFlow()
-
-    fun loadCurrentUser() {
-        launchCatching {
-            val currentUser = authRepository.currentUser
-            _isAnonymous.value = currentUser != null && currentUser.isAnonymous
-        }
-    }
-
-    fun signOut() {
-        launchCatching {
-            authRepository.signOut()
-            _shouldRestartApp.value = true
-        }
-    }
-
-    fun deleteAccount() {
-        launchCatching {
-            authRepository.deleteAccount()
+    fun signIn(
+        email: String,
+        password: String,
+        showErrorSnackbar: (ErrorMessage) -> Unit
+    ) {
+        launchCatching(showErrorSnackbar) {
+            authRepository.signIn(email, password)
             _shouldRestartApp.value = true
         }
     }

@@ -1,4 +1,4 @@
-package id.yoriworksdev.portasanctajournal
+package id.yoriworksdev.portasanctajournal.data.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

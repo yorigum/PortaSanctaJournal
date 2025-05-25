@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,12 +15,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,42 +41,18 @@ import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import id.yoriworksdev.portasanctajournal.R
+import id.yoriworksdev.portasanctajournal.data.model.component.CarouselItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CarouselPorta(){
-    data class CarouselItem(
-        val id: Int, val imageUri: String, val contentDescription: String
-    )
+fun CarouselPorta(items: List<CarouselItem>){
 
-    val uri = "https://picsum.photos/id/${(1..126).random()}/1200/1600"
-
-
-    val items = remember {
-        listOf(
-            CarouselItem(
-                0,
-                "https://picsum.photos/id/${(1..126).random()}/1200/1600",
-                "cupcake"
-            ),
-            CarouselItem(
-                1,
-                "https://picsum.photos/id/${(1..126).random()}/1200/1600",
-                "donut"
-            ),
-            CarouselItem(
-                2, "https://picsum.photos/id/${(1..126).random()}/1200/1600",
-                "eclair"
-            ),
-            CarouselItem(
-                3,
-                "https://picsum.photos/id/${(1..126).random()}/1200/1600",
-                "froyo"
-            ),
-
-            )
+    var loadedContent by remember {
+        mutableIntStateOf(0)
     }
 
+
+Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
     HorizontalMultiBrowseCarousel(
         state = rememberCarouselState { items.count() },
         modifier = Modifier
@@ -87,7 +67,7 @@ fun CarouselPorta(){
         val model = ImageRequest.Builder(LocalContext.current)
             .data(item.imageUri)
             .build()
-        Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(8.dp).clip(RoundedCornerShape(16.dp)).shadow(2.dp)){
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.maskClip(MaterialTheme.shapes.large)){
             val painter = rememberAsyncImagePainter(model)
             val state by painter.state.collectAsState()
 
@@ -102,7 +82,10 @@ fun CarouselPorta(){
                         painter = painter,
                         contentDescription = item.contentDescription
                     )
-                    Log.d("CarouselPorta", "Success")
+                    Log.d("CarouselPorta", "Success: ${item.contentDescription}")
+                    if(loadedContent<items.size){
+                        loadedContent++
+                    }
                 }
                 is AsyncImagePainter.State.Error -> {
                     Log.d("CarouselPorta", "Error")
@@ -111,4 +94,7 @@ fun CarouselPorta(){
         }
 
     }
+    Text(text = "$loadedContent of ${items.size} loaded", color = Color.White, style = MaterialTheme.typography.headlineSmall)
+}
+
 }
